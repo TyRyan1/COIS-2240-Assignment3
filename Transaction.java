@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,16 +55,36 @@ public class Transaction {
         return sdf.format(new Date());
     }
     
-    
+    //save a transaction
     private void saveTransaction(String details){
     	try {
-    	PrintWriter out = new PrintWriter("transactions.txt");
+    	PrintWriter out = new PrintWriter(new FileWriter("src/transactions.txt",true));
     	out.println(details);
+    	out.close();
     	}
     	catch(FileNotFoundException e) {
     		System.out.println("Transactions file not found");
     	}
-    	
-    	
+    	catch (IOException e) {
+    		System.err.println("could not find file");
+    	}
+
     }
+    
+    //display the transaction history
+    public void displayTransactionHistory() {
+    	BufferedReader reader = null;
+    	try {
+    		reader = new BufferedReader(new FileReader("src/transactions.txt"));
+    		String line;
+    		 while ((line = reader.readLine()) != null) {
+                 System.out.println(line);
+    		 }
+    	}
+    	catch (IOException e) {
+    		System.err.println("could not read file");
+    	}
+    }
+    
 }
+
