@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +24,7 @@ public class Transaction {
             member.borrowBook(book); 
             String transactionDetails = getCurrentDateTime() + " - Borrowing: " + member.getName() + " borrowed " + book.getTitle();
             System.out.println(transactionDetails);
+            saveTransaction(transactionDetails);
             return true;
         } else {
             System.out.println("The book is not available.");
@@ -36,6 +39,7 @@ public class Transaction {
             book.returnBook();
             String transactionDetails = getCurrentDateTime() + " - Returning: " + member.getName() + " returned " + book.getTitle();
             System.out.println(transactionDetails);
+            saveTransaction(transactionDetails);
         } else {
             System.out.println("This book was not borrowed by the member.");
         }
@@ -45,5 +49,18 @@ public class Transaction {
     private String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(new Date());
+    }
+    
+    
+    private void saveTransaction(String details){
+    	try {
+    	PrintWriter out = new PrintWriter("transactions.txt");
+    	out.println(details);
+    	}
+    	catch(FileNotFoundException e) {
+    		System.out.println("Transactions file not found");
+    	}
+    	
+    	
     }
 }
