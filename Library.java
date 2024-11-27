@@ -6,13 +6,28 @@ public class Library {
     private List<Book> books = new ArrayList<Book>();
 
     // Add a new member to the library
-    public void addMember(Member member) {
+    // I did not use the findMemberById method because it seemed over complicated and inefficient.
+    //the assignment stated that we MAY use these methods, so I assumed that means they are optional
+    public boolean addMember(Member member) {
+    	for (Member i : members) {
+    		if (i.getId() == member.getId()) {   			
+    			return true;
+    		}
+    	}
         members.add(member);
+    	return false;
     }
     
     // Add a new book to the library
-    public void addBook(Book book) {
-        books.add(book);
+    public boolean addBook(Book book) {
+    	for (Book i : books) {
+    		if (i.getId() == book.getId()){
+    			return true;
+    		}	
+    	}
+    	books.add(book);
+    	return false; 
+        
     }
 
     // Find a member by ID
