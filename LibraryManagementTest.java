@@ -11,8 +11,8 @@ public class LibraryManagementTest {
 		try {
 			Book a = new Book(100, "Math");
 			Book b = new Book(999, "Sci");
-			//Book c = new Book(1000, "Bio");
-			//fail("could not add book");
+			Book c = new Book(1000, "Bio");
+			fail("could not add book");
 			
 			//check getId Method
 			assertEquals(100, a.getId());
