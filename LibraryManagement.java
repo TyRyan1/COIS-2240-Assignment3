@@ -52,12 +52,17 @@ public class LibraryManagement {
                     
                     scanner.nextLine();
 
-                    Book newBook = new Book(id, title);
-                    if (!library.addBook(newBook)) {
-                    	System.out.println("Book added to library successfully.");
+                    try{ //if id is within valid range, create a new book
+                    	Book newBook = new Book(id, title);
+                    	if (!library.addBook(newBook)) {  //check if book already exsists
+                        	System.out.println("Book added to library successfully.");
+                        }
+                        else {
+                        	System.out.println("Book ID already exists");
+                        }
                     }
-                    else {
-                    	System.out.println("Book ID already exists");
+                    catch(Exception e) {
+                    	System.out.println("Error: " + e.getMessage());
                     }
                     
                     break;
