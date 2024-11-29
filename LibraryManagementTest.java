@@ -1,6 +1,8 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 
 public class LibraryManagementTest {
 
@@ -47,16 +49,24 @@ public class LibraryManagementTest {
 			assertTrue("Transaction not completed",newBook.isAvailable());//check if book is available
 			
 			assertFalse(Transaction.getTransaction().returnBook(newBook,newMember));//check if book can be returned twice
-			
-			
 		
 		} catch (Exception e) {
-			fail("ERROR");
-			
-		}
-		
+			fail("ERROR");	
+			}
 		
 	}
-	
+	@Test
+	public void testSingletonTransaction(){
+		try {
+		Constructor<Transaction> constructor = Transaction.class.getDeclaredConstructor();
+		int actual = constructor.getModifiers();
+		int expected = Modifier.PRIVATE;
+				
+		assertEquals(expected, actual);
+		}
+		catch(Exception e){
+			fail("ERROR");
+		}
+	}
 	
 }

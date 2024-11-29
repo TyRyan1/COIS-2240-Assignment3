@@ -54,7 +54,7 @@ public class LibraryManagement {
 
                     try{ //if id is within valid range, create a new book
                     	Book newBook = new Book(id, title);
-                    	if (!library.addBook(newBook)) {  //check if book already exsists
+                    	if (!library.addBook(newBook)) {  //check if book already exists
                         	System.out.println("Book added to library successfully.");
                         }
                         else {
@@ -64,7 +64,6 @@ public class LibraryManagement {
                     catch(Exception e) {
                     	System.out.println("Error: " + e.getMessage());
                     }
-                    
                     break;
                 case 3:
                 	System.out.println("\n--- Available Members ---");
